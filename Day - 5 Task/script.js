@@ -1,5 +1,52 @@
 // Create your own resume data in JSON format
-let myResume=[{
+let resume={
+    "profile": {
+      "name": "GOBINATH R",
+      "email": "gobigobi@gamil.com",
+      "phone": 1234567890,
+      "degree": "B.F.Sc",
+      "location": {
+        "address": "5/87,South Street",
+        "postalCode": 636112,
+        "city": "Salem",
+        "state": "Tamilnadu",
+        "country": "India"
+      },
+    },
+  
+
+    "education":[ 
+      {
+        "institution": "Annamalai University",
+        "department": "Marine Science",
+        "studyType": "Regular",
+        "batch start year": 2019,
+        "batch end year": 2023,
+        "gpa": 7.5,
+      }],
+    "skills":[ 
+      {
+        "name": "javascript,c++,html",
+        "level": "beginer",
+      }],
+
+    "languages":[ 
+      {
+        "language": "Tamil,Enlish",
+      }],
+
+    "hobbies": [
+      {
+        "hobbies": "Chess,Cricket",
+      }],
+    
+  }
+  console.log(resume);
+
+
+  //for loop purpose
+
+  let myResume=[{
     "profile": {
       "name": "GOBINATH R",
       "email": "gobigobi@gamil.com",
@@ -41,7 +88,6 @@ let myResume=[{
       }
     
   }]
-  console.log(myResume);
 
   //Over all for loop
 
