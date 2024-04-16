@@ -3,15 +3,18 @@
     grid-template-columns:repeat(8,1fr);
     grid-template-rows: repeat(8,1fr);
     border: 5px solid black;
+    width: 600;
+    height: 600;
 }
 .black{
-    height: px;
+    height: 100px;
     width: 100px;
     background-color: black;
-    position:static;
+    place-items: center;
 }
 .white{
     height: 100px;
     width: 100px;
     background-color: white;
+    place-items: center;
 }
