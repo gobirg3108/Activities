@@ -1,41 +1,43 @@
-// Fetch data from NASA API
-function fetchNasaData() {
-    return fetch('https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('nasaImage').innerHTML = `
-                <img src="${data.url}" alt="${data.title}" class="img-fluid">
-                <p>${data.title}</p>
-                <p>${data.explanation}</p>
-            `;
-        })
-        .catch(error => console.error('Error fetching NASA data:', error));
+// Fetches a random cat fact from the Cat Facts API
+
+function fetchCatFact() {
+  fetch("https://catfact.ninja/fact")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("catFact").innerText = data.fact;
+    })
+    .catch((error) => {
+      console.error("Error fetching cat fact:", error);
+      document.getElementById("catFact").innerText = "Failed to fetch cat fact";
+    });
 }
 
-// Fetch data from OpenWeatherMap API
-function fetchWeatherData() {
-    return fetch('https://api.openweathermap.org/data/2.5/weather?q=city_name&appid=YOUR_API_KEY')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('weather').innerHTML = `
-                <p>Temperature: ${data.main.temp} °C</p>
-                <p>Description: ${data.weather[0].description}</p>
-            `;
-        })
-        .catch(error => console.error('Error fetching weather data:', error));
+// Fetches a random dog image from the Dog CEO's Dog API
+
+function fetchDogImage() {
+  fetch("https://dog.ceo/api/breeds/image/random")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("dogImage").src = data.message;
+    })
+    .catch((error) => {
+      console.error("Error fetching dog image:", error);
+      document.getElementById("dogImage").src = "";
+      document.getElementById("dogImage").alt = "Failed to fetch dog image";
+    });
 }
 
-// Fetch data from Dog CEO API
-function fetchDogImageData() {
-    return fetch('https://dog.ceo/api/breeds/image/random')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('dogImage').innerHTML = `
-                <img src="${data.message}" alt="Random Dog" class="img-fluid">
-            `;
-        })
-        .catch(error => console.error('Error fetching dog image data:', error));
-}
+// Fetches a random joke from the JokeAPI
 
-// Call functions to fetch data
-Promise.all([fetchNasaData(), fetchWeatherData(), fetchDogImageData()]);
+function fetchJoke() {
+  fetch("https://v2.jokeapi.dev/joke/Any")
+    .then((response) => response.json())
+    .then((data) => {
+      let joke = data.joke || `${data.setup} - ${data.delivery}`;
+      document.getElementById("joke").innerText = joke;
+    })
+    .catch((error) => {
+      console.error("Error fetching joke:", error);
+      document.getElementById("joke").innerText = "Failed to fetch joke";
+    });
+}
