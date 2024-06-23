@@ -1,0 +1,26 @@
+.author-form-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.author-form-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.author-form-container label {
+  font-weight: bold;
+}
+
+.author-form-container .form-group {
+  margin-bottom: 20px;
+}
+
+.author-form-container .invalid-feedback {
+  color: red;
+  font-size: 14px;
+}
