@@ -14,10 +14,3 @@ This project is an admin dashboard for managing books and authors in a library m
 ### Prerequisites
 - Node.js (version 14 or higher)
 - npm (version 6 or higher) or yarn (version 1.22 or higher)
-
-### Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/library-management-system.git
-   cd library-management-system
