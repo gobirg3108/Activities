@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const mentorSchema = new mongoose.Schema({
+const MentorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -10,7 +10,6 @@ const mentorSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  students: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
 });
 
-module.exports = mongoose.model("Mentor", mentorSchema);
+module.exports = mongoose.model('Mentor', MentorSchema);

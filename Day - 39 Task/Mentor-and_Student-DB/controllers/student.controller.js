@@ -1,50 +1,27 @@
-const Student = require("../models/student.model");
-const Mentor = require("../models/mentor.model");
+const Student = require('../models/student.model');
 
-// Create a new student
+// Controller methods
 exports.createStudent = async (req, res) => {
   try {
-    const student = new Student(req.body);
-    await student.save();
-    res.status(201).json(student);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
-// Assign or change mentor for a student
-exports.assignOrChangeMentor = async (req, res) => {
-  try {
-    const { studentId, mentorId } = req.body;
-    const student = await Student.findById(studentId);
-    if (!student) {
-      return res.status(404).json({ error: "Student not found" });
-    }
-
-    const mentor = await Mentor.findById(mentorId);
-    if (!mentor) {
-      return res.status(404).json({ error: "Mentor not found" });
-    }
-
-    student.mentor = mentorId;
-    await student.save();
-
+    const { name, email, mentorId } = req.body;
+    const newStudent = new Student({ name, email, mentor: mentorId });
+    const student = await newStudent.save();
     res.json(student);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
 };
 
-// Show the previously assigned mentor for a particular student
-exports.getPreviousMentors = async (req, res) => {
+exports.getStudentsByMentor = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id).populate("mentor");
-    if (!student) {
-      return res.status(404).json({ error: "Student not found" });
-    }
-
-    res.json(student.mentor);
+    const { mentorId } = req.params;
+    const students = await Student.find({ mentor: mentorId });
+    res.json(students);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
 };
+
+// Add more methods as needed (update, delete, etc.)

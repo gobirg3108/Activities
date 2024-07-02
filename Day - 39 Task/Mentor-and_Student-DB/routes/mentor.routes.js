@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const mentorController = require("../controllers/mentor.controller");
+const mentorController = require('../controllers/mentor.controller');
 
-router.post("/create", mentorController.createMentor);
-router.get("/:id/students", mentorController.getStudentsByMentor);
-router.post("/assign-students", mentorController.assignStudentsToMentor);
+// Routes
+router.post('/', mentorController.createMentor);
+router.get('/', mentorController.getAllMentors);
 
 module.exports = router;
