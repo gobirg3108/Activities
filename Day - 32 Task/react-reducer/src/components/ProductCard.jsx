@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/cart/cartSlice';
-import './ProductCard.css'; // Custom CSS file for additional styling
+import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();

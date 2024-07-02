@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductList from './components/ProductList';
 import CartPage from './components/CartPage';
-// src/index.js or src/App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
