@@ -1,8 +1,6 @@
-// src/components/ProductList.js
-
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { StarFill, StarHalf, Star } from 'react-bootstrap-icons';
+import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
 
 const ProductList = ({ products, onAddToCart, cartItems }) => {
   const renderRating = (rating) => {
@@ -24,16 +22,23 @@ const ProductList = ({ products, onAddToCart, cartItems }) => {
       {products.map((product) => (
         <div key={product.id} className="col-md-4 mb-4">
           <Card className="card">
-            <Card.Img variant="top" src={product.image} alt={product.name} className="card-img-top" />
+            <Card.Img
+              variant="top"
+              src={product.image}
+              alt={product.name}
+              className="card-img-top"
+            />
             <Card.Body>
               <Card.Title className="card-title">{product.name}</Card.Title>
               <Card.Text className="card-text">{product.description}</Card.Text>
               <div className="mb-2">{renderRating(product.rating)}</div>
               <Button
-                variant={cartItems.includes(product.id) ? 'danger' : 'primary'}
+                variant={cartItems.includes(product.id) ? "danger" : "primary"}
                 onClick={() => onAddToCart(product.id)}
               >
-                {cartItems.includes(product.id) ? 'Remove from Cart' : 'Add to Cart'}
+                {cartItems.includes(product.id)
+                  ? "Remove from Cart"
+                  : "Add to Cart"}
               </Button>
             </Card.Body>
           </Card>

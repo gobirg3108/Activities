@@ -1,6 +1,4 @@
-// src/components/Footer.js
-
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
   return (
@@ -8,7 +6,10 @@ const Footer = () => {
       <div className="container">
         <p className="mb-0">© 2024 Shopping Cart. All rights reserved.</p>
         <p className="mb-0">
-          Designed by <a href="https://startbootstrap.com" className="text-white">Start Bootstrap</a>
+          Designed by{" "}
+          <a href="https://startbootstrap.com" className="text-white">
+            Start Bootstrap
+          </a>
         </p>
         <div className="mt-2">
           <a href="https://facebook.com" className="text-white mx-2">
