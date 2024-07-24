@@ -4,4 +4,3 @@ module.exports = {
     emailUser: "itzgobi3108@gmail.com",
     emailPass: "qjcq wrgd ljfz nfle"
   };
-  
