@@ -74,7 +74,7 @@ router.post(
   }
 );
 
-// Account activation route
+// Account activation POST route
 router.post('/activate/:token', async (req, res) => {
   try {
     const user = await User.findOne({
@@ -99,7 +99,31 @@ router.post('/activate/:token', async (req, res) => {
   }
 });
 
-// Login route
+// Account activation GET route
+router.get('/activate/:token', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json('Activation link is invalid or has expired.');
+    }
+
+    user.isActive = true;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    res.json('Your account has been activated.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 router.post(
   '/login',
   [
@@ -226,5 +250,6 @@ router.post(
     }
   }
 );
+
 
 module.exports = router;
