@@ -14,7 +14,12 @@ const UrlShortener = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://urlshortener-l2ue.onrender.com/api/url/create', { longUrl });
+      const token = localStorage.getItem('authToken'); // Assuming token is stored in localStorage
+      const response = await axios.post('http://localhost:5000/api/url/create', { longUrl }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       setShortUrl(response.data.shortUrl);
     } catch (err) {
       console.error('Error fetching data:', err);
