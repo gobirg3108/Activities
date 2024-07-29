@@ -2,14 +2,21 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const URL = require('../models/URL');
+const crypto = require('crypto');
 
 // Create a new URL
 router.post('/create', auth, async (req, res) => {
   const { longUrl } = req.body;
 
   try {
-    const shortUrl = generateShortUrl(); // Implement URL shortening logic
-    const urlCode = generateUrlCode(); // Implement URL code generation logic
+    let shortUrl;
+    let urlCode;
+    
+    // Ensure unique shortUrl and urlCode
+    do {
+      shortUrl = generateShortUrl(); // Ensure this generates a unique URL
+      urlCode = generateUrlCode(); // Ensure this generates a unique URL code
+    } while (await URL.findOne({ shortUrl }) || await URL.findOne({ urlCode }));
 
     const newUrl = new URL({
       longUrl,
@@ -23,19 +30,21 @@ router.post('/create', auth, async (req, res) => {
     res.status(201).json(newUrl);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server error' });
+    if (err.code === 11000) {
+      res.status(400).json({ error: 'Duplicate key error' });
+    } else {
+      res.status(500).json({ error: 'Server error' });
+    }
   }
 });
 
 // Utility functions for generating short URL and URL code
 function generateShortUrl() {
-  // Implement logic for generating short URL
-  return 'http://short.url/abc123';
+  return `http://short.url/${crypto.randomBytes(6).toString('hex')}`;
 }
 
 function generateUrlCode() {
-  // Implement logic for generating URL code
-  return 'abc123';
+  return crypto.randomBytes(4).toString('hex');
 }
 
 module.exports = router;

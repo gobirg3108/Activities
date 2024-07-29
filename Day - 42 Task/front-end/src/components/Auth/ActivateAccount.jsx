@@ -13,7 +13,7 @@ const ActivateAccount = () => {
   useEffect(() => {
     const activateAccount = async () => {
       try {
-        await axios.post(`http://localhost:5000/api/auth/activate/${token}`);
+        await axios.post(`https://url-shortener-oh7e.onrender.com/api/auth/activate/${token}`);
         setMessage('Your account has been activated successfully!');
         setTimeout(() => navigate('/login'), 5000); // Redirect after 5 seconds
       } catch (err) {

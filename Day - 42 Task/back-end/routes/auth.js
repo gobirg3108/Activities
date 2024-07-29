@@ -59,7 +59,7 @@ router.post(
         from: config.emailUser,
         subject: 'Account Activation Link',
         text: `Please click on the following link, or paste this into your browser to complete the process:\n\n` +
-          `http://localhost:5000/api/auth/activate/${token}\n\n` +
+          `https://url-shortener-oh7e.onrender.com/api/auth/activate/${token}\n\n` +
           `If you did not request this, please ignore this email.\n`,
       };
 
@@ -196,7 +196,7 @@ router.post(
         from: config.emailUser,
         subject: 'Password Reset Link',
         text: `Please click on the following link, or paste this into your browser to complete the process:\n\n` +
-          `http://localhost:5000/api/auth/reset/${token}\n\n` +
+          `https://url-shortener-oh7e.onrender.com/api/auth/reset/${token}\n\n` +
           `If you did not request this, please ignore this email.\n`,
       };
 

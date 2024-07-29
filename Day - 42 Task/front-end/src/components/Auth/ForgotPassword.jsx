@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/forgot', { email }); // Adjusted endpoint
+      await axios.post('https://url-shortener-oh7e.onrender.com/api/auth/forgot', { email }); // Adjusted endpoint
       setAlertMessage('Password reset email sent!');
       setAlertSeverity('success');
     } catch (err) {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/url/';
+const API_URL = 'https://url-shortener-oh7e.onrender.com/api/url/create';
 
 export const shortenUrl = async (longUrl) => {
   const response = await axios.post(`${API_URL}shorten`, { longUrl });

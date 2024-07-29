@@ -25,7 +25,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/auth/reset/${token}`, { password });
+      const response = await axios.post(`https://url-shortener-oh7e.onrender.com/api/auth/reset/${token}`, { password });
       setSuccess('Your password has been successfully reset.');
       setTimeout(() => navigate('/login'), 3000); // Redirect after 3 seconds
     } catch (err) {
