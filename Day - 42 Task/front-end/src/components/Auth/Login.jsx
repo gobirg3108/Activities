@@ -17,7 +17,7 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post('https://url-shortener-oh7e.onrender.com/api/auth/login', { email, password });
+      const response = await axios.post('https://urlshortener-l2ue.onrender.com/api/auth/login', { email, password });
       localStorage.setItem('token', response.data.token);
       navigate('/dashboard');
     } catch (err) {

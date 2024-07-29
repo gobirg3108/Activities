@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  Paper,
-  Grid,
-  CircularProgress,
-} from "@mui/material";
-import axios from "axios";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  Title,
-} from "chart.js";
+import React, { useEffect, useState } from 'react';
+import { Container, Typography, Box, Paper, Grid, CircularProgress } from '@mui/material';
+import axios from 'axios';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title } from 'chart.js';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, Title);
 
@@ -27,27 +14,23 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("authToken");
-        console.log("Retrieved Token:", token); // Debugging log
+        const token = localStorage.getItem('authToken');
         if (!token) {
-          setError("No authentication token found");
+          setError('No authentication token found');
           setLoading(false);
           return;
         }
 
-        const response = await axios.get(
-          "https://url-shortener-oh7e.onrender.com/api/dashboard/stats",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await axios.get('https://url-shortener-oh7e.onrender.com/api/dashboard/stats', {
+          headers: {
+            'Authorization': `Bearer ${token}`
           }
-        );
+        });
         setData(response.data);
         setLoading(false);
       } catch (err) {
-        console.error("Error:", err.response ? err.response.data : err.message); // Improved error logging
-        setError("Failed to fetch data");
+        console.error('Error fetching data:', err.response ? err.response.data : err.message);
+        setError('Failed to fetch data');
         setLoading(false);
       }
     };
@@ -58,24 +41,19 @@ const Dashboard = () => {
     labels: data.labels || [],
     datasets: [
       {
-        label: "URLs Created",
+        label: 'URLs Created',
         data: data.values || [],
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
         tension: 0.1,
-      },
-    ],
+      }
+    ]
   };
 
   if (loading) {
     return (
       <Container>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100vh"
-        >
+        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
           <CircularProgress />
         </Box>
       </Container>
@@ -86,9 +64,7 @@ const Dashboard = () => {
     return (
       <Container>
         <Box mt={5} textAlign="center">
-          <Typography variant="h6" color="error">
-            {error}
-          </Typography>
+          <Typography variant="h6" color="error">{error}</Typography>
         </Box>
       </Container>
     );
@@ -100,21 +76,13 @@ const Dashboard = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           Dashboard
         </Typography>
-        <Paper elevation={3} style={{ padding: "20px" }}>
+        <Paper elevation={3} style={{ padding: '20px' }}>
           <Typography variant="h6" gutterBottom>
             URL Statistics
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Line
-                data={chartData}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    title: { display: true, text: "URL Statistics Over Time" },
-                  },
-                }}
-              />
+              <Line data={chartData} options={{ responsive: true, plugins: { title: { display: true, text: 'URL Statistics Over Time' } } }} />
             </Grid>
           </Grid>
         </Paper>

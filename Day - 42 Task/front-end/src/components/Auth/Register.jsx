@@ -20,7 +20,7 @@ const Register = () => {
     setMessage('');
     
     try {
-      const response = await axios.post('https://url-shortener-oh7e.onrender.com/api/auth/register', {
+      const response = await axios.post('https://urlshortener-l2ue.onrender.com/api/auth/register', {
         email,
         firstName,
         lastName,

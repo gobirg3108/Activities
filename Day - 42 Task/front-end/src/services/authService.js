@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://url-shortener-oh7e.onrender.com/api/auth/';
+const API_URL = 'https://urlshortener-l2ue.onrender.com/api/auth/';
 
 export const login = async (username, password) => {
   const response = await axios.post(`${API_URL}login`, { username, password });

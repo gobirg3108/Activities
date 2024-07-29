@@ -8,7 +8,7 @@ const UrlTable = () => {
   useEffect(() => {
     const fetchUrls = async () => {
       try {
-        const response = await axios.get('https://url-shortener-oh7e.onrender.com/api/url');
+        const response = await axios.get('https://urlshortener-l2ue.onrender.com/api/url');
         setUrls(response.data);
       } catch (err) {
         console.error(err);
