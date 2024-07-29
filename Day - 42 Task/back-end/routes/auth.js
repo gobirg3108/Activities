@@ -5,10 +5,9 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const { body, validationResult } = require('express-validator');
-const config = require('../config');
+const config = require('../config/config');
 const User = require('../models/User');
 
-// Create a transporter for sending emails
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
@@ -45,7 +44,7 @@ router.post(
         lastName,
         email,
         password: hashedPassword,
-        isActive: false, // Default inactive until activation
+        isActive: false,
       });
 
       const user = await newUser.save();
@@ -232,12 +231,10 @@ router.post(
       });
 
       if (!user) {
-        return res.status(400).json('Password reset link is invalid or has expired.');
+        return res.status(400).json('Password reset token is invalid or has expired.');
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      user.password = hashedPassword;
+      user.password = await bcrypt.hash(password, 10);
       user.resetPasswordToken = undefined;
       user.resetPasswordExpires = undefined;
 
@@ -250,6 +247,5 @@ router.post(
     }
   }
 );
-
 
 module.exports = router;

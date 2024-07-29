@@ -1,35 +1,41 @@
 const express = require('express');
 const router = express.Router();
-const shortid = require('shortid');
-const URL = require('../models/URL');
 const auth = require('../middleware/auth');
+const URL = require('../models/URL');
 
-// Create short URL
-router.post('/shorten', auth, (req, res) => {
+// Create a new URL
+router.post('/create', auth, async (req, res) => {
   const { longUrl } = req.body;
-  const urlCode = shortid.generate();
-  const shortUrl = `${req.protocol}://${req.get('host')}/${urlCode}`;
 
-  const newUrl = new URL({
-    longUrl,
-    shortUrl,
-    urlCode,
-    createdBy: req.user.id
-  });
+  try {
+    const shortUrl = generateShortUrl(); // Implement URL shortening logic
+    const urlCode = generateUrlCode(); // Implement URL code generation logic
 
-  newUrl.save().then(url => res.json(url)).catch(err => res.status(500).json('Server error'));
+    const newUrl = new URL({
+      longUrl,
+      shortUrl,
+      urlCode,
+      createdBy: req.user.id
+    });
+
+    await newUrl.save();
+
+    res.status(201).json(newUrl);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-// Redirect to original URL
-router.get('/:code', (req, res) => {
-  URL.findOne({ urlCode: req.params.code }).then(url => {
-    if (url) {
-      url.clicks++;
-      url.save().then(() => res.redirect(url.longUrl));
-    } else {
-      res.status(404).json('No URL found');
-    }
-  }).catch(err => res.status(500).json('Server error'));
-});
+// Utility functions for generating short URL and URL code
+function generateShortUrl() {
+  // Implement logic for generating short URL
+  return 'http://short.url/abc123';
+}
+
+function generateUrlCode() {
+  // Implement logic for generating URL code
+  return 'abc123';
+}
 
 module.exports = router;

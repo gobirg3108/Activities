@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const URL = require('../models/URL');
 const auth = require('../middleware/auth');
+const URL = require('../models/URL');
 
-// Get URL statistics
-router.get('/stats', auth, (req, res) => {
-  URL.find({ createdBy: req.user.id }).then(urls => {
-    const totalUrls = urls.length;
-    const totalClicks = urls.reduce((acc, url) => acc + url.clicks, 0);
+router.get('/stats', auth, async (req, res) => {
+  try {
+    // Example: Fetch stats for URLs created by the authenticated user
+    const urls = await URL.find({ createdBy: req.user.id });
 
-    res.json({ totalUrls, totalClicks });
-  }).catch(err => res.status(500).json('Server error'));
+    // Sample data processing
+    const labels = urls.map(url => url.createdAt.toISOString().slice(0, 10));
+    const values = urls.map(url => url.clicks);
+
+    res.json({ labels, values });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 module.exports = router;
